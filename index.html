@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Red Escolar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- ============ PANTALLA DE INICIO DE SESIÓN ============ -->
+  <section id="pantalla-login" class="login" hidden>
+    <div class="login__arte">
+      <div class="login__marca"><span class="logo" aria-hidden="true"></span><span class="js-nombre-comunidad">Red Escolar</span></div>
+      <div class="login__mensaje">
+        <h1>Comparte, aprende y conecta con tu comunidad.</h1>
+        <p class="js-descripcion-comunidad">Un espacio seguro para compartir, aprender y crecer juntas.</p>
+      </div>
+      <div class="login__burbujas" aria-hidden="true">
+        <div class="burbuja b1">❤️ 24</div>
+        <div class="burbuja b2">💬 ¡Me encantó tu proyecto!</div>
+        <div class="burbuja b3">✨ Nueva seguidora</div>
+      </div>
+    </div>
+
+    <div class="login__panel">
+      <form id="form-login" class="login__form" autocomplete="on">
+        <h2>¡Bienvenida de vuelta!</h2>
+        <p class="texto-suave">Ingresa con el usuario y la contraseña que te entregó la administración.</p>
+
+        <label class="campo">
+          <span>Usuario</span>
+          <input id="login-usuario" name="username" type="text" placeholder="ej. ana.lopez" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+        </label>
+
+        <label class="campo">
+          <span>Contraseña</span>
+          <div class="campo__con-boton">
+            <input id="login-password" name="password" type="password" placeholder="••••••••" autocomplete="current-password" required>
+            <button type="button" class="btn-icono js-ver-password" aria-label="Mostrar contraseña"></button>
+          </div>
+        </label>
+
+        <p id="login-error" class="alerta alerta--error" hidden></p>
+
+        <button type="submit" class="btn btn--verde btn--bloque" id="btn-login">Iniciar sesión</button>
+
+        <p class="login__nota">¿No tienes cuenta o olvidaste tu contraseña?<br>Solicítala a la administración de la comunidad.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ APLICACIÓN ============ -->
+  <div id="app" class="app" hidden>
+    <aside class="sidebar" id="sidebar">
+      <a href="#/inicio" class="sidebar__marca"><span class="logo" aria-hidden="true"></span><span class="js-nombre-comunidad">Red Escolar</span></a>
+      <nav id="menu" class="menu"></nav>
+
+      <div class="anuncio" id="anuncio">
+        <h4 id="anuncio-titulo"></h4>
+        <p id="anuncio-texto"></p>
+        <a href="#/inicio" class="btn btn--verde btn--chico">Ir al inicio</a>
+      </div>
+
+      <button class="menu__item menu__salir" id="btn-salir"></button>
+    </aside>
+    <div class="sidebar-fondo" id="sidebar-fondo"></div>
+
+    <div class="principal">
+      <header class="topbar">
+        <button class="btn-icono topbar__menu" id="btn-menu" aria-label="Abrir menú"></button>
+        <div class="topbar__titulo">
+          <h1 id="titulo-vista">Inicio</h1>
+          <nav class="migas" id="migas"></nav>
+        </div>
+        <div class="topbar__acciones">
+          <a href="#/notificaciones" class="btn-circulo" id="btn-campana" aria-label="Notificaciones"><span class="punto" id="punto-notif" hidden></span></a>
+          <a href="#/mi-perfil" class="topbar__yo" id="topbar-yo"></a>
+        </div>
+      </header>
+
+      <main id="vista" class="vista"></main>
+
+      <footer class="pie">
+        <span>© <span id="anio"></span> <span class="js-nombre-comunidad">Red Escolar</span></span>
+        <span class="pie__links"><a href="#/normas">Normas de la comunidad</a><a href="#/mi-perfil">Mi cuenta</a></span>
+      </footer>
+    </div>
+  </div>
+
+  <div id="cargando-global" class="cargando-global"><div class="spinner"></div></div>
+  <div id="modales"></div>
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/nucleo.js"></script>
+  <script src="js/social.js"></script>
+  <script src="js/moderacion.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
