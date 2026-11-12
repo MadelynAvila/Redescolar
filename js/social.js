@@ -40,7 +40,7 @@ function carrusel(medios) {
   if (!medios || !medios.length) return '';
   const varios = medios.length > 1;
   return `<div class="carrusel" data-carrusel data-i="0">
-    <div class="carrusel__pista">${medios.map(u => `<div class="carrusel__item">${medioHTML(u)}</div>`).join('')}</div>
+    <div class="carrusel__pista">${medios.map(u => `<div class="carrusel__item">${esVideo(u) ? '' : `<div class="carrusel__fondo" style="background-image:url('${esc(u)}')"></div>`}${medioHTML(u)}</div>`).join('')}</div>
     ${varios ? `
       <button class="carrusel__btn carrusel__btn--izq" data-accion="carrusel" data-dir="-1" aria-label="Anterior">${icono('izq')}</button>
       <button class="carrusel__btn carrusel__btn--der" data-accion="carrusel" data-dir="1" aria-label="Siguiente">${icono('der')}</button>
@@ -48,6 +48,16 @@ function carrusel(medios) {
       <span class="carrusel__contador">1/${medios.length}</span>` : ''}
   </div>`;
 }
+// El recuadro toma la forma de la primera imagen (entre vertical 4:5 y horizontal 1.91:1)
+document.addEventListener('load', e => {
+  const img = e.target;
+  if (img.tagName !== 'IMG' || !img.parentElement?.classList.contains('carrusel__item')) return;
+  const c = img.closest('[data-carrusel]');
+  if (!c || c.dataset.proporcion || img.parentElement !== c.querySelector('.carrusel__item')) return;
+  const r = Math.min(Math.max(img.naturalWidth / img.naturalHeight, 0.8), 1.91);
+  c.dataset.proporcion = r; c.style.setProperty('--proporcion', r);
+}, true);
+
 ACCIONES.carrusel = el => {
   const c = el.closest('[data-carrusel]');
   const n = $$('.carrusel__item', c).length;
